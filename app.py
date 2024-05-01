@@ -22,8 +22,8 @@ def get_response():
     # Make prediction using Gradio Client
     client = Client("https://ddosxd-realvisxl.hf.space/--replicas/flm7z/")
     result = client.predict(
-        "horse",
-        "blur",
+        prompt,
+        negative_prompt,
         True,
         0,
         256,
