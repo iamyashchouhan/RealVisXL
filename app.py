@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from flask import Flask, request, jsonify
 from gradio_client import Client
-from flask_cors import CORS
 
 
 app = Flask(__name__)
@@ -41,8 +40,5 @@ def get_response():
 
     # Return the result as JSON response
     return jsonify(result)
-
-if __name__ == '__main__':
-    app.run(port=8080, debug=True)
 
 
