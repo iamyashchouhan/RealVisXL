@@ -1,23 +1,16 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, request, jsonify
 from gradio_client import Client
 
 app = Flask(__name__)
 
-@app.route("/mbsa")
-def mbsa():
-    return render_template('index.html')
+@app.route('/', methods=['GET'])
+def get_prediction():
 
-@app.route('/get_response', methods=['GET'])
-def get_response():
-    # Get data from the request
+    # Extract data for prediction
     prompt = request.args.get("prompt")
     negative_prompt = request.args.get("negative_prompt")
-    use_negative_prompt = request.args.get("use_negative_prompt")
-    seed = request.args.get("seed")
-    width = request.args.get("width")
-    height = request.args.get("height")
-    guidance_scale = request.args.get("guidance_scale")
-    randomize_seed = request.args.get("randomize_seed")
+    width = int(request.args.get("width"))
+    height = int(request.args.get("height"))
 
     # Make prediction using Gradio Client
     client = Client("https://ddosxd-realvisxl.hf.space/--replicas/flm7z/")
@@ -26,8 +19,8 @@ def get_response():
         negative_prompt,
         True,
         0,
-        256,
-        256,
+        width,
+        height,
         7,
         True,
         api_name="/run"
